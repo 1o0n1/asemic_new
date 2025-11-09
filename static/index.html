@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asemic Web Hub</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Asemic Web Hub</h1>
+            <div id="ws-status" class="status-disconnected">Disconnected</div>
+        </header>
+
+        <main class="main-grid">
+            <!-- Панель управления -->
+            <div class="panel control-panel">
+                <h2><span class="icon">🔑</span> Manage Keys</h2>
+                <div class="form-group">
+                    <form id="add-key-form" class="inline-form">
+                        <input type="text" id="key-input" placeholder="Enter new key" required>
+                        <button type="submit">Add</button>
+                    </form>
+                </div>
+                <div class="key-list-container">
+                    <h3>Active Decryption Keys:</h3>
+                    <ul id="key-list">
+                        <!-- Ключи будут добавлены сюда -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Глобальные настройки -->
+            <div class="panel global-settings-panel">
+                <h2><span class="icon">⚙️</span> Global Settings</h2>
+                <div class="form-group">
+                    <label for="noise-level">Background Noise Level:</label>
+                    <div id="noise-level" class="radio-group">
+                        <label><input type="radio" name="noise" value="Off" checked> Off</label>
+                        <label><input type="radio" name="noise" value="Slow"> Slow</label>
+                        <label><input type="radio" name="noise" value="Medium"> Medium</label>
+                        <label><input type="radio" name="noise" value="Fast"> Fast</label>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <h3><span class="icon">📊</span> Live Stats:</h3>
+                    <div>Packets Sent: <span id="stat-sent">0</span></div>
+                    <div>Noise Sent: <span id="stat-noise-sent">0</span></div>
+                    <div>Packets Received: <span id="stat-received">0</span></div>
+                    <div>Messages Decrypted: <span id="stat-decrypted">0</span></div>
+                </div>
+            </div>
+
+            <!-- Панель отправки -->
+            <div class="panel send-panel">
+                <h2><span class="icon">🚀</span> Transmit Message</h2>
+                <form id="send-message-form">
+                    <div class="form-group">
+                        <label for="target-addr">Target IP:Port / Domain:</label>
+                        <input type="text" id="target-addr" placeholder="e.g., 127.0.0.1:7070 or domain.com:7070" required>
+                    </div>
+                    <div class="form-group">
+                     <label for="send-pattern">Obfuscation Pattern:</label>
+                       <select id="send-pattern" required>
+                        <option value="Starfall">Starfall (Dynamic Signature)</option>
+                        <option value="Sunshine">Sunshine (Static Signature)</option>
+                     </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="send-key">Encryption Key:</label>
+                        <select id="send-key" required>
+                            <option value="" disabled selected>--Select a key--</option>
+                        </select>
+                        <div class="current-selection">Applied: <strong id="current-key">None</strong></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text">Message:</label>
+                        <textarea id="message-text" rows="3" placeholder="Type your message..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="file-input">Or attach a file:</label>
+                        <input type="file" id="file-input">
+                        <span id="file-name-display"></span>
+                    </div>
+                    <button type="submit" class="send-button">Send</button>
+                </form>
+            </div>
+            
+            <!-- Лента сообщений -->
+            <div class="panel messages-panel">
+                <h2><span class="icon">📩</span> Decrypted Messages</h2>
+                <div id="message-feed" class="feed">
+                    <div class="feed-placeholder">Waiting for messages...</div>
+                </div>
+            </div>
+
+            <!-- Лента трафика -->
+            <div class="panel traffic-panel">
+                <h2><span class="icon">📡</span> Live Traffic Feed</h2>
+                <div id="traffic-feed" class="feed">
+                     <div class="feed-placeholder">Waiting for traffic...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
