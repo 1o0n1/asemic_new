@@ -49,10 +49,10 @@ pub async fn run_web_server(
         .route("/config/noise", post(set_noise_handler))
         .with_state(Arc::new(app_state));
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000")
+    let listener = tokio::net::TcpListener::bind("127.0.0.1:3000")
         .await
         .unwrap();
-    info!("Web server listening on http://0.0.0.0:3000");
+    info!("Web server listening on http://127.0.0.1:3000");
     axum::serve(listener, app).await.unwrap();
 }
 
